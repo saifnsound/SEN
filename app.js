@@ -11,6 +11,7 @@ const express = require("express"),
 
 var indexRoutes = require("./routes/index");
 var questionRoutes = require("./routes/question");
+var paperRoutes = require("./routes/paper")
 
 if (environment.error) {
     throw environment.error;
@@ -50,6 +51,7 @@ app.use(function (req, res, next) {
 
 app.use("/", indexRoutes);
 app.use("/questions", questionRoutes);
+app.use("/papers", paperRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log("Server is live at Port:", process.env.PORT);
