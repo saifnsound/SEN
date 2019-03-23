@@ -6,7 +6,40 @@
         <p>Add/Search questions to/from your library by clicking the buttons below</p>
         <div class="btn-group btn-group-toggle">
             <a class="btn btn-primary btn-lg" href="/questions/add" role="button">Add Question</a>
-           <a class="btn btn-dark btn-lg" href="/questions/search" role="button">Search Questions</a>
+            <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false" aria-controls="search" class="btn btn-dark btn-lg">Search Questions</button>
+        </div>
+    </div>
+    <div class="collapse" id="search">
+        <div class="card border-light shadow p-3 bg-white rounded mb-4 d-inline-flex p-2" style="width: 1110px;">
+            <form action="/questions/search" method="GET">
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control col" name="format">
+                            <option value="">Select Format</option>
+                            <option value="MCQ">Multiple choice questions</option>
+                            <option value="FITB">Fill in the blanks</option>
+                            <option value="TF">True/False</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="subject" class="form-control" placeholder="Enter Subject">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="topic" class="form-control" placeholder="Enter topic">
+                    </div>
+                    <div class="col">
+                        <select class="form-control" name="difficulty">
+                            <option value=""> Select difficulty </option>
+                            <option value="1"> Easy </option>
+                            <option value="2"> Medium </option>
+                            <option value="3"> Hard </option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary" style="width: 200px;">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <% questions.forEach(function(question){ %>
