@@ -77,4 +77,32 @@ router.get("/:id", middleware.isLoggedIn, (req, res) => {
         }
     });
 });
+
+router.post("/search", middleware.isLoggedIn, (req, res) => {
+    var search = {
+        "author.username": "" + req.user.username + ""
+    }
+    if (req.body.format != '') {
+        search.format = req.body.format;
+    }
+    if (req.body.subject != '') {
+        search.subject = req.body.subject;
+    }
+    if (req.body.topic != '') {
+        search.topic = req.body.topic;
+    }
+    if (req.body.difficulty != '') {
+        search.difficulty = req.body.difficulty;
+    }
+    console.log(search);
+    question.find(search, (err, allQuestions) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("questions/search", {
+                questions: allQuestions
+            });
+        }
+    })
+})
 module.exports = router;
