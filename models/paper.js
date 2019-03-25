@@ -16,10 +16,12 @@ var paperSchema = new mongoose.Schema({
         required: true,
     },
     subject: String,
+    time: String,
     topic: String,
     questions: [Object],
     questionPDF: Object,
     solutionPDF: Object,
+    format: [],
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
