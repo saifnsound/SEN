@@ -11,10 +11,6 @@ var paperSchema = new mongoose.Schema({
         required: true,
         enum: [1, 2, 3]
     },
-    numberOfQuestions: {
-        type: Number,
-        required: true,
-    },
     subject: String,
     time: String,
     topic: String,
