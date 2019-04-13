@@ -87,7 +87,7 @@ router.get("/:id/download", middleware.isLoggedIn, (req, res) => {
         doc.text(`Topic: ${foundPaper.topic}`);
         for (let i = 0; i < questions.length; i++) {
             doc.moveDown();
-            doc.text(`${i+1}. ${questions[i].question}`);
+            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')}`);
         }
         doc.end();
     });
@@ -114,9 +114,9 @@ router.get("/:id/solution", middleware.isLoggedIn, (req, res) => {
         doc.text(`Topic: ${foundPaper.topic}`);
         for (let i = 0; i < questions.length; i++) {
             doc.moveDown();
-            doc.text(`${i+1}. ${questions[i].question}`);
+            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')}`);
             doc.moveDown();
-            doc.text(`Sol. ${questions[i].solution}`);
+            doc.text(`Sol. ${questions[i].solution.replace(/\r\n|\r/g, '\n')}`);
         }
         doc.end();
     });
