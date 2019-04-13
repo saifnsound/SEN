@@ -6,8 +6,15 @@ var questionSchema = new mongoose.Schema({
         required: true,
         enum: ['MCQ', 'FITB', 'TF']
     },
-    subject: String,
-    topic: String,
+    public: Boolean,
+    subject: {
+        type: String,
+        required: true
+    },
+    topic: {
+        type: String,
+        required: true
+    },
     question: {
         type: String,
         required: true

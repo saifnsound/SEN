@@ -5,7 +5,6 @@ var paper = require("../models/paper");
 var question = require("../models/question");
 var paperController = require("../controllers/paper");
 const PDFDocument = require('pdfkit');
-const fs = require("fs")
 
 router.get("/", middleware.isLoggedIn, (req, res) => {
     paper.find({
@@ -133,4 +132,35 @@ router.get("/:id", middleware.isLoggedIn, (req, res) => {
         }
     });
 });
+
+router.post("/search", middleware.isLoggedIn, (req, res) => {
+    var search = {
+        "author.username": "" + req.user.username + ""
+    }
+    if (req.body.format != undefined) {
+        search.format = req.body.format;
+    }
+    if (req.body.name != '') {
+        search.name = req.body.name;
+    }
+    if (req.body.subject != '') {
+        search.subject = req.body.subject;
+    }
+    if (req.body.topic != '') {
+        search.topic = req.body.topic;
+    }
+    if (req.body.difficulty != '') {
+        search.difficulty = req.body.difficulty;
+    }
+    console.log(search);
+    paper.find(search, (err, allPapers) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("papers/search", {
+                papers: allPapers
+            });
+        }
+    })
+})
 module.exports = router;

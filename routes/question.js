@@ -29,6 +29,7 @@ router.post("/add", middleware.isLoggedIn, (req, res) => {
         question: req.body.question,
         solution: req.body.solution,
         difficulty: req.body.difficulty,
+        public: req.body.public,
         author: {
             id: req.user._id,
             username: req.user.username

@@ -9,16 +9,19 @@
         <p>Go check out our question library by clicking the button below.</p>
         <div class="btn-group btn-group-toggle">
             <a class="btn btn-primary btn-lg" href="/papers/generate" role="button">Generate Question Paper</a>
-            <a class="btn btn-dark btn-lg" href="#" role="button">Search Question Paper</a>
+            <button type="button" data-toggle="collapse" data-target="#search" aria-expanded="false"
+                aria-controls="search" class="btn btn-dark btn-lg">Search Question Papers</button>
         </div>
     </div>
     <div class="collapse" id="search">
         <div class="card border-light shadow p-3 bg-white rounded mb-4 d-inline-flex p-2" style="width: 1110px;">
-            <form action="/questions/search" method="POST">
+            <form action="/papers/search" method="POST">
                 <div class="row">
                     <div class="col">
-                        <select class="form-control col" name="format">
-                            <option value="">Select Format</option>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                    </div>
+                    <div class="col">
+                        <select multiple class="form-control" name="format">
                             <option value="MCQ">Multiple choice questions</option>
                             <option value="FITB">Fill in the blanks</option>
                             <option value="TF">True/False</option>
