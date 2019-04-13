@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var middleware = require('../middleware/index');
 
 router.get("/", (req, res) => {
 	res.render("home");
@@ -41,4 +42,35 @@ router.get("/logout", (req, res) => {
 	req.flash("success", "Logged you out!");
 	res.redirect("/");
 })
+
+router.get("/account", middleware.isLoggedIn, (req, res) => {
+	search = {};
+	search.username = req.user.username;
+	User.findOne(search, (err, userInformation) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(userInformation);
+			res.render("account", {
+				user: userInformation
+			});
+		}
+	});
+});
+
+router.post("/account", middleware.isLoggedIn, (req, res) => {
+	search = {};
+	search.username = req.user.username;
+	User.findOneAndUpdate(search, req.body.user, (err, userInformation) => {
+		if (err) {
+			req.flash("error", err.message)
+			res.redirect("/account");
+		} else {
+			req.flash("success", "Updated Account information");
+			res.redirect("/");
+		}
+	});
+});
+
+
 module.exports = router;

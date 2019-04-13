@@ -4,7 +4,8 @@ var paperSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     difficulty: {
         type: Number,

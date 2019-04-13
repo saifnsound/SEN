@@ -11,7 +11,20 @@ var UserSchema = new mongoose.Schema({
 		type: String,
 		minlength: 6,
 		maxlength: 10
-	}
+	},
+	fullName: String,
+	email: {
+		type: String,
+		validate: {
+			validator: function (v) {
+				var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+				return emailRegex.test(v);
+			},
+			message: props => `${props.value} is not a valid email`
+		},
+		unique: true
+	},
+	designation: String
 });
 
 UserSchema.plugin(passportLocalMongoose);

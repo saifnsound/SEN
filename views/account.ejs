@@ -1,0 +1,24 @@
+<% include ./partials/header %>
+<div class="container custom">
+    <div class="card">
+        <h2 class="card-header">Account Information</h2>
+        <div class="card-body">
+            <form action="/account" method="POST">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" name="user[fullName]" class="form-control" value="<%=user.fullName%>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="user[email]" class="form-control" value="<%=user.email%>">
+                </div>
+                <div class="form-group">
+                    <label for="fullname">Designation</label>
+                    <input type="text" name="user[designation]" class="form-control" value="<%=user.designation%>">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer %>
