@@ -6,6 +6,7 @@ const express = require("express"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
+    environment = require("dotenv").config(),
     User = require("./models/user");
 
 var indexRoutes = require("./routes/index");
@@ -13,6 +14,12 @@ var questionRoutes = require("./routes/question");
 var paperRoutes = require("./routes/paper")
 
 var port = process.env.PORT || 3000;
+
+if (environment.error) {
+    throw environment.error;
+}
+
+console.log(environment.parsed);
 
 mongoose.connect(process.env.DATABASEURL);
 
