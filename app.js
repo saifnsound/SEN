@@ -14,8 +14,6 @@ var paperRoutes = require("./routes/paper")
 
 var port = process.env.PORT || 3000;
 
-console.log(environment.parsed);
-
 mongoose.connect(process.env.DATABASEURL);
 
 app.use(bodyParser.urlencoded({
