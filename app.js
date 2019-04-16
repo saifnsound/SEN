@@ -13,6 +13,8 @@ var indexRoutes = require("./routes/index");
 var questionRoutes = require("./routes/question");
 var paperRoutes = require("./routes/paper")
 
+var port = process.env.PORT || 3000;
+
 if (environment.error) {
     throw environment.error;
 }
@@ -53,8 +55,8 @@ app.use("/", indexRoutes);
 app.use("/questions", questionRoutes);
 app.use("/papers", paperRoutes);
 
-app.listen(process.env.PORT, () => {
-    console.log("Server is live at Port:", process.env.PORT);
+app.listen(port, () => {
+    console.log("Server is live at Port:", port);
 });
 
 module.exports = app;

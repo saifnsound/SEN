@@ -4,7 +4,8 @@
   "description": "A platform to generate question paper automatically.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app.js"
   },
   "author": "Saif Kotwal",
   "license": "ISC",
