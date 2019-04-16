@@ -56,3 +56,5 @@ app.use("/papers", paperRoutes);
 app.listen(process.env.PORT, () => {
     console.log("Server is live at Port:", process.env.PORT);
 });
+
+module.exports = app;

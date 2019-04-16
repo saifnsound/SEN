@@ -38,7 +38,7 @@ router.post("/generate", middleware.isLoggedIn, (req, res) => {
         },
         questions: []
     }
-    console.log(newPaper.format);
+
     question.find({
         "author.username": "" + req.user.username + ""
     }, (err, allQuestions) => {
@@ -70,10 +70,19 @@ router.get("/:id/download", middleware.isLoggedIn, (req, res) => {
         var questions = [];
         for (let i = 0; i < foundPaper.questions.length; i++) {
             await question.findById(foundPaper.questions[i], (err, question) => {
+                if (question.difficulty == 1) {
+                    question.marks = 5;
+                } else if (question.difficulty == 2) {
+                    question.marks = 10;
+                } else {
+                    question.marks = 15;
+                }
                 questions.push(question);
             })
         }
+
         const doc = new PDFDocument;
+        doc.info['Title'] = foundPaper.name;
         doc.pipe(res);
         doc.fontSize(25)
             .text(foundPaper.name, {
@@ -86,7 +95,7 @@ router.get("/:id/download", middleware.isLoggedIn, (req, res) => {
         doc.text(`Topic: ${foundPaper.topic}`);
         for (let i = 0; i < questions.length; i++) {
             doc.moveDown();
-            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')}`);
+            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')} [${questions[i].marks}]`);
         }
         doc.end();
     });
@@ -97,6 +106,13 @@ router.get("/:id/solution", middleware.isLoggedIn, (req, res) => {
         var questions = [];
         for (let i = 0; i < foundPaper.questions.length; i++) {
             await question.findById(foundPaper.questions[i], (err, question) => {
+                if (question.difficulty == 1) {
+                    question.marks = 5;
+                } else if (question.difficulty == 2) {
+                    question.marks = 10;
+                } else {
+                    question.marks = 15;
+                }
                 questions.push(question);
             })
         }
@@ -113,7 +129,7 @@ router.get("/:id/solution", middleware.isLoggedIn, (req, res) => {
         doc.text(`Topic: ${foundPaper.topic}`);
         for (let i = 0; i < questions.length; i++) {
             doc.moveDown();
-            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')}`);
+            doc.text(`${i+1}. ${questions[i].question.replace(/\r\n|\r/g, '\n')} [${questions[i].marks}]`);
             doc.moveDown();
             doc.text(`Sol. ${questions[i].solution.replace(/\r\n|\r/g, '\n')}`);
         }
