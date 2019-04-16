@@ -84,6 +84,7 @@ router.get("/:id/download", middleware.isLoggedIn, (req, res) => {
         const doc = new PDFDocument;
         doc.info['Title'] = foundPaper.name;
         doc.pipe(res);
+        doc.image('./public/daiict.png');
         doc.fontSize(25)
             .text(foundPaper.name, {
                 align: 'center'
@@ -118,6 +119,7 @@ router.get("/:id/solution", middleware.isLoggedIn, (req, res) => {
         }
         const doc = new PDFDocument;
         doc.pipe(res);
+        doc.image('./public/daiict.png');
         doc.fontSize(25)
             .text(foundPaper.name, {
                 align: 'center'
