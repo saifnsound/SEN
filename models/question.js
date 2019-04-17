@@ -6,22 +6,26 @@ var questionSchema = new mongoose.Schema({
         required: true,
         enum: ['MCQ', 'FITB', 'TF']
     },
-    public: Boolean,
+    public: String,
     subject: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 50
     },
     topic: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 50
     },
     question: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 500
     },
     solution: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 50
     },
     difficulty: {
         type: Number,
