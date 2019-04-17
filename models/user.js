@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
-		maxlength: 50
+		maxlength: 10
 	},
 	password: {
 		type: String,
