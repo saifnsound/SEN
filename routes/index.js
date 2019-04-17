@@ -16,6 +16,10 @@ router.post("/register", (req, res) => {
 	var newUser = new User({
 		username: req.body.username
 	});
+	if (req.body.password.length < 6 || req.body.password.length > 10) {
+		req.flash("error", "Password must be 6-10 characters long");
+		return res.redirect("/register");
+	}
 	User.register(newUser, req.body.password, function (err, user) {
 		if (err) {
 			req.flash("error", err.message);

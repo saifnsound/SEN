@@ -48,7 +48,7 @@ router.post("/generate", middleware.isLoggedIn, (req, res) => {
             var topics = newPaper.topic.split("/");
             newPaper.questions = paperController.generateQuestions(allQuestions, newPaper, topics);
             if (newPaper.questions == -1) {
-                req.flash("error", "Questions in the library are insufficient. Please add more questions");
+                req.flash("error", "Questions in the library are insufficient. Please add more questions.");
                 return res.redirect("/questions");
             } else {
                 paper.create(newPaper, (err, newlyCreated) => {
@@ -56,7 +56,7 @@ router.post("/generate", middleware.isLoggedIn, (req, res) => {
                         req.flash("error", err.message)
                         res.redirect("/papers");
                     } else {
-                        req.flash("success", "Added question paper to your library");
+                        req.flash("success", "Added question paper to your library.");
                         res.redirect("/papers");
                     }
                 });
@@ -175,9 +175,14 @@ router.post("/search", middleware.isLoggedIn, (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("papers/search", {
-                papers: allPapers
-            });
+            if (allPapers.length == 0) {
+                req.flash("error", "No question papers found.");
+                res.redirect("/papers");
+            } else {
+                res.render("papers/search", {
+                    papers: allPapers
+                });
+            }
         }
     })
 })

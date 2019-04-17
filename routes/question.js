@@ -100,9 +100,14 @@ router.post("/search", middleware.isLoggedIn, (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render("questions/search", {
-                questions: allQuestions
-            });
+            if (allQuestions.length == 0) {
+                req.flash("error", "No questions found.");
+                res.redirect("/questions");
+            } else {
+                res.render("questions/search", {
+                    questions: allQuestions
+                });
+            }
         }
     })
 })

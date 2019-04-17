@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <div class="container custom">
     <div class="card">
-        <h2 class="card-header">Add question</h2>
+        <h2 class="card-header">Generate question paper</h2>
         <div class="card-body">
             <form action="/papers/generate" method="POST">
                 <div class="row">
@@ -17,7 +17,7 @@
                         <label for="subject">Subject</label>
                         <input type="text" name="subject" class="form-control" placeholder="Maths/Science/etc...">
                         <small id="passwordHelpBlock" class="form-text text-muted">
-                            For more than one subject put a "/" between each subject.
+                            Enter only one subject
                         </small>
                     </div>
                     <div class="form-group col">
